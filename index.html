@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b12">
+<meta name="description" content="VCode for Android. Code anywhere.">
+<title>VCode • Code Anywhere</title>
+<style>
+:root{--bg:#080b12;--panel:#0d121c;--line:#1d2635;--text:#f4f7fb;--muted:#94a0b4;--accent:#7c5cff;--accent2:#22d3ee;--shadow:0 24px 80px rgba(0,0,0,.38)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 75% 10%,#17133b 0,#080b12 35%),var(--bg);color:var(--text);font:16px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:inherit;text-decoration:none}.wrap{max-width:1100px;margin:auto;padding:0 22px}
+nav{height:78px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px}.mark{width:40px;height:40px;border:1px solid #33405a;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,#161c2b,#0c1018);box-shadow:0 8px 30px #0006}.mark span{font-weight:900;letter-spacing:-3px;color:#fff}.navlinks{display:flex;gap:24px;color:var(--muted);font-size:14px}.navlinks a:hover{color:#fff}
+.hero{padding:92px 0 80px;text-align:center;position:relative}.glow{position:absolute;width:420px;height:220px;left:50%;top:40px;transform:translateX(-50%);background:#7c5cff2b;filter:blur(80px);pointer-events:none}.badge{position:relative;display:inline-flex;padding:7px 12px;border:1px solid #29334a;border-radius:999px;background:#0d121ccc;color:#aeb9cc;font-size:13px}.badge b{color:#fff}.hero h1{position:relative;font-size:clamp(48px,9vw,92px);line-height:.98;letter-spacing:-5px;margin:25px 0 20px}.hero h1 span{background:linear-gradient(90deg,#fff,#9c8cff,#62e8ff);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{max-width:650px;margin:0 auto;color:var(--muted);font-size:18px}.actions{display:flex;justify-content:center;gap:12px;margin-top:32px;flex-wrap:wrap}.btn{padding:13px 19px;border-radius:12px;border:1px solid #2b3548;background:#101724;font-weight:700}.btn.primary{border:0;background:linear-gradient(135deg,#7c5cff,#4e8cff);box-shadow:0 12px 35px #604cff44}.btn:hover{transform:translateY(-1px)}
+.section{padding:50px 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:linear-gradient(180deg,#101722,#0b1018);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow)}.icon{font-size:25px}.card h3{margin:12px 0 6px}.card p{margin:0;color:var(--muted);font-size:14px}.release{margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:20px;border:1px solid var(--line);border-radius:18px;background:#0c1119}.release small{color:var(--muted)}footer{padding:55px 0 35px;color:#68758b;font-size:13px;text-align:center}
+@media(max-width:720px){.navlinks{display:none}.hero{padding:70px 0 55px}.hero h1{letter-spacing:-3px}.grid{grid-template-columns:1fr}.release{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+<a class="brand" href="/"><div class="mark"><span>&lt;V&gt;</span></div>VCode</a>
+<div class="navlinks"><a href="#features">Features</a><a id="sourceNav" href="https://github.com/Christianzz4603/Vcode" target="_blank" rel="noopener">Source</a></div>
+</nav>
+<main>
+<section class="hero">
+<div class="glow"></div>
+<div class="badge">Android IDE • <b id="version">Latest release</b></div>
+<h1>Code.<br><span>Anywhere.</span></h1>
+<p>A focused coding environment for Android, built for developers who want their projects close at hand.</p>
+<div class="actions">
+<a id="download" class="btn primary" href="https://github.com/Christianzz4603/Vcode/releases" target="_blank" rel="noopener">Download VCode</a>
+<a class="btn" href="https://github.com/Christianzz4603/Vcode" target="_blank" rel="noopener">View source</a>
+</div>
+</section>
+<section id="features" class="section">
+<div class="grid">
+<article class="card"><div class="icon">⌘</div><h3>Real IDE experience</h3><p>Keep your editor, projects and developer workflow together in one clean interface.</p></article>
+<article class="card"><div class="icon">▣</div><h3>Built for Android</h3><p>Designed around the constraints and convenience of coding directly from your phone.</p></article>
+<article class="card"><div class="icon">⌁</div><h3>Git included</h3><p>Stay connected to your repositories and keep your source under version control.</p></article>
+</div>
+<div class="release">
+<div><strong id="releaseTitle">VCode releases</strong><br><small id="releaseMeta">Check GitHub for the newest build.</small></div>
+<a id="releaseLink" class="btn" href="https://github.com/Christianzz4603/Vcode/releases" target="_blank" rel="noopener">All releases ↗</a>
+</div>
+</section>
+</main>
+<footer>© 2026 VCode · Built for people who code everywhere.</footer>
+</div>
+<script>
+const repo="Christianzz4603/Vcode";
+fetch(`https://api.github.com/repos/${repo}/releases/latest`)
+.then(r=>r.ok?r.json():Promise.reject())
+.then(x=>{
+ const tag=x.tag_name||"Latest";
+ document.getElementById("version").textContent=tag;
+ document.getElementById("releaseTitle").textContent=x.name||tag;
+ const d=x.published_at?new Date(x.published_at).toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"}):"";
+ document.getElementById("releaseMeta").textContent=`${d}${x.assets?.length?` · ${x.assets.length} downloadable asset${x.assets.length===1?"":"s"}`:""}`;
+ document.getElementById("releaseLink").href=x.html_url;
+ if(x.assets?.length){document.getElementById("download").href=x.assets[0].browser_download_url}
+})
+.catch(()=>{});
+</script>
+</body>
+</html>
