@@ -4,64 +4,119 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="google-site-verification" content="9itadM5S9NBN1lYsbC3KXynMW-eQVLNw7udwaSXANdw" />
-<meta name="theme-color" content="#080b12">
-<meta name="description" content="VCode for Android. Code anywhere.">
-<title>VCode • Code Anywhere</title>
+<meta name="theme-color" content="#0b1428">
+<meta name="color-scheme" content="dark">
+<title>Vcode - Code editor for Android</title>
+<meta name="description" content="Vcode is a fast, free and open source code editor and file manager for Android with 49 languages, Git, SFTP/FTP and keyword suggestions.">
+<link rel="canonical" href="https://vcode-site.pages.dev/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vcode - Code editor for Android">
+<meta property="og:description" content="Fast, free and open source code editor for Android. 49 languages, Git, SFTP/FTP, keyword suggestions.">
+<meta property="og:url" content="https://vcode-site.pages.dev/">
+<meta name="twitter:card" content="summary">
 <style>
-:root{--bg:#080b12;--panel:#0d121c;--line:#1d2635;--text:#f4f7fb;--muted:#94a0b4;--accent:#7c5cff;--accent2:#22d3ee;--shadow:0 24px 80px rgba(0,0,0,.38)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 75% 10%,#17133b 0,#080b12 35%),var(--bg);color:var(--text);font:16px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
-a{color:inherit;text-decoration:none}.wrap{max-width:1100px;margin:auto;padding:0 22px}
-nav{height:78px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px}.mark{width:40px;height:40px;border:1px solid #33405a;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,#161c2b,#0c1018);box-shadow:0 8px 30px #0006}.mark span{font-weight:900;letter-spacing:-3px;color:#fff}.navlinks{display:flex;gap:24px;color:var(--muted);font-size:14px}.navlinks a:hover{color:#fff}
-.hero{padding:92px 0 80px;text-align:center;position:relative}.glow{position:absolute;width:420px;height:220px;left:50%;top:40px;transform:translateX(-50%);background:#7c5cff2b;filter:blur(80px);pointer-events:none}.badge{position:relative;display:inline-flex;padding:7px 12px;border:1px solid #29334a;border-radius:999px;background:#0d121ccc;color:#aeb9cc;font-size:13px}.badge b{color:#fff}.hero h1{position:relative;font-size:clamp(48px,9vw,92px);line-height:.98;letter-spacing:-5px;margin:25px 0 20px}.hero h1 span{background:linear-gradient(90deg,#fff,#9c8cff,#62e8ff);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{max-width:650px;margin:0 auto;color:var(--muted);font-size:18px}.actions{display:flex;justify-content:center;gap:12px;margin-top:32px;flex-wrap:wrap}.btn{padding:13px 19px;border-radius:12px;border:1px solid #2b3548;background:#101724;font-weight:700}.btn.primary{border:0;background:linear-gradient(135deg,#7c5cff,#4e8cff);box-shadow:0 12px 35px #604cff44}.btn:hover{transform:translateY(-1px)}
-.section{padding:50px 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:linear-gradient(180deg,#101722,#0b1018);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow)}.icon{font-size:25px}.card h3{margin:12px 0 6px}.card p{margin:0;color:var(--muted);font-size:14px}.release{margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:20px;border:1px solid var(--line);border-radius:18px;background:#0c1119}.release small{color:var(--muted)}footer{padding:55px 0 35px;color:#68758b;font-size:13px;text-align:center}
-@media(max-width:720px){.navlinks{display:none}.hero{padding:70px 0 55px}.hero h1{letter-spacing:-3px}.grid{grid-template-columns:1fr}.release{align-items:flex-start;flex-direction:column}}
+:root{--bg:#0b1428;--bg2:#08101f;--card:#0f1a33;--line:#1c2a4a;--text:#eaf2ff;--muted:#93a6c9;--c1:#3ec6fd;--c2:#2594fc;--c3:#0e64f0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(900px 500px at 80% -5%,rgba(37,148,252,.22),transparent 60%),radial-gradient(700px 400px at 0% 20%,rgba(14,100,240,.14),transparent 60%),var(--bg2);color:var(--text);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}.wrap{max-width:1080px;margin:auto;padding:0 20px}
+.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:var(--c2);padding:8px 12px;border-radius:8px;z-index:9}
+nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:.2px}
+.brand .logo{width:46px;height:26px}
+.links{display:flex;align-items:center;gap:22px;font-size:15px;color:var(--muted)}.links a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:12px;font-weight:700;border:1px solid var(--line);background:rgba(255,255,255,.03);transition:transform .15s,border-color .15s}
+.btn:hover{transform:translateY(-1px);border-color:#34508a}
+.btn.primary{border:0;color:#04101f;background:linear-gradient(180deg,var(--c1),var(--c2));box-shadow:0 10px 30px rgba(37,148,252,.35)}
+.btn.small{padding:8px 14px;border-radius:10px;font-size:14px}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;padding:42px 0 70px}
+.pill{display:inline-block;padding:5px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:13px;background:rgba(255,255,255,.03)}
+h1{font-size:clamp(36px,5.6vw,60px);line-height:1.06;margin:18px 0 16px;letter-spacing:-1.2px}
+.grad{background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);font-size:18px;max-width:520px;margin:0 0 26px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}.meta{margin:16px 0 0;color:var(--muted);font-size:14px;min-height:22px}
+.editor{background:linear-gradient(180deg,#0f1b36,#0b1630);border:1px solid var(--line);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.45);overflow:hidden}
+.bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+.bar i{width:10px;height:10px;border-radius:50%;background:#2a3a5f}.bar span{margin-left:10px;color:var(--muted);font-size:13px;font-family:ui-monospace,Menlo,Consolas,monospace}
+pre{margin:0;padding:16px 0;font:13.5px/1.75 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow:auto;position:relative}
+.ln{display:flex}.ln b{width:42px;flex:none;text-align:right;padding-right:14px;color:#42567f;font-weight:400;user-select:none}
+.k{color:#3ec6fd}.s{color:#7ee0a3}.f{color:#ffd479}.c{color:#6f84ad}.cur{display:inline-block;width:2px;height:1.1em;background:var(--c1);vertical-align:text-bottom;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.pop{position:absolute;left:96px;top:92px;min-width:190px;background:#13234a;border:1px solid #2a4380;border-radius:10px;box-shadow:0 14px 36px rgba(0,0,0,.5);padding:4px;font:13px/1.4 ui-monospace,Menlo,Consolas,monospace}
+.pop div{display:flex;justify-content:space-between;gap:14px;padding:6px 10px;border-radius:7px;color:#cfe0ff}.pop div.on{background:linear-gradient(90deg,#1b5fd0,#2594fc);color:#fff}.pop small{opacity:.65}
+section{padding:56px 0}h2{font-size:clamp(26px,3.6vw,36px);letter-spacing:-.6px;margin:0 0 10px}.sub{color:var(--muted);margin:0 0 30px;max-width:620px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:16px;padding:20px}
+.card h3{margin:14px 0 6px;font-size:17px}.card p{margin:0;color:var(--muted);font-size:14.5px}.card code,.faq code{background:#14264d;border-radius:6px;padding:1px 6px;color:#cfe6ff;font-size:.92em}
+.ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:var(--c1);background:linear-gradient(145deg,#12244a,#0c1833);border:1px solid #23376b}.ico svg{width:22px;height:22px}
+.chips{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}.chips li{padding:6px 13px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.03);font-size:14px;color:#cfe0ff}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}.step{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.step:before{content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:linear-gradient(180deg,var(--c1),var(--c2));color:#04101f;font-weight:800;margin-bottom:12px}
+.step h3{margin:0 0 6px;font-size:17px}.step p{margin:0;color:var(--muted);font-size:14.5px}
+.faq details{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025);margin-bottom:10px;padding:4px 18px}.faq summary{cursor:pointer;padding:14px 0;font-weight:650}.faq p{margin:0 0 14px;color:var(--muted)}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:34px 0 46px;color:var(--muted);font-size:14.5px}
+.foot{display:flex;flex-wrap:wrap;gap:18px 40px;justify-content:space-between}.foot a{color:#cfe0ff}.foot a:hover{text-decoration:underline}.fl{display:flex;flex-wrap:wrap;gap:8px 20px}
+@media(max-width:900px){.hero{grid-template-columns:1fr;gap:30px;padding-top:24px}.grid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:1fr}.links a.hide{display:none}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.links{gap:14px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="wrap">
-<nav>
-<a class="brand" href="/"><div class="mark"><span>&lt;V&gt;</span></div>VCode</a>
-<div class="navlinks"><a href="#features">Features</a><a id="sourceNav" href="https://github.com/Christianzz4603/Vcode" target="_blank" rel="noopener">Source</a></div>
+<nav aria-label="Main">
+ <a class="brand" href="/"><svg class="logo" viewBox="44 70 112 60" role="img" aria-label="Vcode logo" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3ec6fd"/><stop offset="1" stop-color="#2594fc"/></linearGradient></defs><path fill="url(#gn)" d="M81.9,81.9 81.8,82.2 81.9,83.2 84.4,90.8 84.6,91.2 85.5,94 87.3,98.4 88.4,101.8 89,103 89.2,103.9 89.8,105.2 90.1,106.4 92.6,112.8 93.7,116.2 95.8,121.3 96.7,122 103,122 103.4,121.8 103.9,121.2 105.2,118.1 105.2,117.8 106.4,115 107.7,110.9 108.3,109.6 110.9,102.1 111.5,100.9 111.7,99.9 112.3,98.7 113,96.5 113.2,96.2 116.5,86.9 116.7,86.5 118,82.8 118,82.3 117.8,81.7 117.3,81.4 107.7,81.4 107.3,81.7 106.3,84.7 106,85 104.9,88.6 104.7,88.9 101.7,97.7 101.1,98.9 100.1,102 99.8,102.4 99.5,102.2 97.7,96.8 97.5,96.4 92.7,81.9 92.3,81.4 82.5,81.4zM122.3,74.3 121.4,74.7 120.7,75.4 120.4,76.2 120.3,84 120.4,84.6 121.1,85.7 121.4,86.1 125.1,88.5 143.4,99.3 142.7,99.9 132.8,105.6 121.7,112.3 121.1,112.9 120.4,114.2 120.4,124.1 120.7,124.7 121.4,125.4 122,125.7 123.1,125.7 125.4,124.6 129,122.2 140.5,115.4 141.1,115 147,111.7 149.5,110.1 150.7,108.9 151.7,107.5 152,106 152,94 151.8,92.9 151.4,92.1 150.9,91.3 149.3,89.9 124.6,74.9 123.6,74.5zM77.1,74.3 75.4,75 69.4,78.6 68.8,79 68.3,79.2 57.1,86.2 53.9,88 50.7,90 50.2,90.3 48.8,91.5 48.3,92.3 48,93.8 48,106.2 48.1,106.3 48.1,107.2 48.6,108.5 49.1,109.3 50.2,110.1 67.2,119.9 75.8,125.1 77.1,125.7 78.3,125.7 79.1,125.3 79.4,125 80,123.8 80,114.4 79.5,113.4 78.4,112.3 59.9,101.3 57.2,99.8 56.5,99.3 57.6,98.5 62.8,95.5 70.1,91.1 76.3,87.5 78.8,85.9 79.5,85.3 80,84.2 80,76.5 79.7,75.7 79.1,74.8 78,74.3z"/><path fill="#0e64f0" d="M100.7,103.8 100.6,104.6 104.7,116.3 105.5,116.9 107.2,112.7 107.7,110 105.1,107zM143,99.7 137.2,103.2 136.8,103.9 137.3,105.2 142.9,111.3 145.4,112.2 148.9,110.4 151,108.6 151.9,106.5 151.8,103.6 151.4,103.1 149.5,102.9 144.4,99.8zM56.6,99.5 55.4,99.8 49.9,103.1 48.9,104 48.1,105.9 48.3,107.9 49.6,109.6 55.7,112.9 56.8,112.8 59,111.2 64.8,105.3 64.4,104.2z"/></svg><span>Vcode</span></a>
+ <div class="links"><a class="hide" href="#features">Features</a><a class="hide" href="#languages">Languages</a><a class="hide" href="#install">Install</a><a class="hide" href="#faq">FAQ</a><a class="btn small" href="https://github.com/Christianzz4603/Vcode">GitHub</a></div>
 </nav>
-<main>
-<section class="hero">
-<div class="glow"></div>
-<div class="badge">Android IDE • <b id="version">Latest release</b></div>
-<h1>Code.<br><span>Anywhere.</span></h1>
-<p>A focused coding environment for Android, built for developers who want their projects close at hand.</p>
-<div class="actions">
-<a id="download" class="btn primary" href="https://github.com/Christianzz4603/Vcode/releases" target="_blank" rel="noopener">Download VCode</a>
-<a class="btn" href="https://github.com/Christianzz4603/Vcode" target="_blank" rel="noopener">View source</a>
 </div>
-</section>
-<section id="features" class="section">
-<div class="grid">
-<article class="card"><div class="icon">⌘</div><h3>Real IDE experience</h3><p>Keep your editor, projects and developer workflow together in one clean interface.</p></article>
-<article class="card"><div class="icon">▣</div><h3>Built for Android</h3><p>Designed around the constraints and convenience of coding directly from your phone.</p></article>
-<article class="card"><div class="icon">⌁</div><h3>Git included</h3><p>Stay connected to your repositories and keep your source under version control.</p></article>
+<main id="main">
+<div class="wrap">
+ <div class="hero">
+  <div>
+   <span class="pill">Free and open source &middot; Android 7.0+</span>
+   <h1>A fast <span class="grad">code editor</span> for Android</h1>
+   <p class="lead">Write, manage and version your code right on your phone. 49 languages, Git, SFTP/FTP and smart keyword suggestions in one lightweight app.</p>
+   <div class="cta">
+    <a id="download" class="btn primary" href="https://github.com/Christianzz4603/Vcode/releases/latest/download/Vcode-foss.apk">Download APK</a>
+    <a class="btn" href="https://github.com/Christianzz4603/Vcode">View source</a>
+   </div>
+   <p class="meta" id="meta">Vcode-foss.apk &middot; latest build from GitHub</p>
+  </div>
+  <div class="editor" aria-label="Vcode editor preview">
+   <div class="bar"><i></i><i></i><i></i><span>Main.kt</span></div>
+<pre aria-hidden="true"><div class="ln"><b>1</b><span><span class="k">package</span> com.vcode.studio</span></div><div class="ln"><b>2</b></div><div class="ln"><b>3</b><span>imp<span class="cur"></span></span></div><div class="ln"><b>4</b></div><div class="ln"><b>5</b><span><span class="k">fun</span> <span class="f">main</span>() {</span></div><div class="ln"><b>6</b><span>    <span class="f">println</span>(<span class="s">"Hello, Vcode!"</span>)</span></div><div class="ln"><b>7</b><span>}</span></div><div class="ln"><b>8</b><span class="c">// 49 languages. Your pocket IDE.</span></div><div class="pop"><div class="on"><span>import</span><small>keyword</small></div><div><span>implements</span><small>keyword</small></div></div></pre>
+  </div>
+ </div>
 </div>
-<div class="release">
-<div><strong id="releaseTitle">VCode releases</strong><br><small id="releaseMeta">Check GitHub for the newest build.</small></div>
-<a id="releaseLink" class="btn" href="https://github.com/Christianzz4603/Vcode/releases" target="_blank" rel="noopener">All releases ↗</a>
-</div>
-</section>
+<div class="wrap"><section id="features"><h2>Everything you need to code on the go</h2><p class="sub">A focused editor and file manager, built for small screens.</p><div class="grid"><article class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></div><h3>49 languages</h3><p>Syntax highlighting for Kotlin, Java, Python, Swift, Rust, Go, TypeScript, SQL and many more.</p></article><article class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div><h3>Keyword suggestions</h3><p>Type <code>imp</code>, tap <code>import</code>. Suggestions come from each language plus the words in your file.</p></article><article class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="9" r="2"/><path d="M6 7v10M18 11c0 4-6 3-12 6"/></svg></div><h3>Git integration</h3><p>Commit, push, pull and manage branches without leaving the editor.</p></article><article class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01"/></svg></div><h3>Local and remote files</h3><p>A built-in file manager with SFTP and FTP(S) support.</p></article><article class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v6h8V3M8 21v-7h8v7"/></svg></div><h3>Never lose work</h3><p>Changes are saved automatically and undo/redo survives an app restart.</p></article><article class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 100 18c1.5 0 2-1 1.5-2s0-2 1.5-2h2a3 3 0 003-3c0-6-4-11-8-11z"/><path d="M7.5 11h.01M10 7h.01M15 7.5h.01"/></svg></div><h3>Color schemes</h3><p>Pick a theme that matches the way you like to code.</p></article><article class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4H5v16h3M16 4h3v16h-3"/><path d="M12 9v6"/></svg></div><h3>Smart editing</h3><p>Bracket matching, auto indent, auto-closing pairs, and quick line select, duplicate and delete.</p></article><article class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.8-8 11-8 11z"/></svg></div><h3>Free and open source</h3><p>Licensed under Apache 2.0. Read it, build it, improve it.</p></article></div></section></div>
+<div class="wrap"><section id="languages"><h2>49 languages</h2><p class="sub">Syntax highlighting out of the box, including Swift, R, PowerShell, Objective-C, Less, SCSS, CoffeeScript, Pug, Diff and Handlebars.</p><ul class="chips"><li>Batchfile</li><li>C</li><li>Clojure</li><li>CoffeeScript</li><li>C++</li><li>C#</li><li>CSS</li><li>Dart</li><li>Diff</li><li>Dockerfile</li><li>Fortran</li><li>F#</li><li>Go</li><li>Groovy</li><li>Handlebars</li><li>HTML</li><li>Ini</li><li>Java</li><li>JavaScript</li><li>Json</li><li>Julia</li><li>Kotlin</li><li>LaTeX</li><li>Less</li><li>Lisp</li><li>Lua</li><li>Makefile</li><li>Markdown</li><li>Objective-C</li><li>Perl</li><li>PHP</li><li>PowerShell</li><li>Pug</li><li>Python</li><li>R</li><li>Ruby</li><li>Rust</li><li>SCSS</li><li>Shell</li><li>Smali</li><li>SQL</li><li>Swift</li><li>TOML</li><li>TypeScript</li><li>Visual Basic</li><li>Vue</li><li>XML</li><li>YAML</li><li>ZIG</li></ul></section></div>
+<div class="wrap"><section id="install"><h2>Install in a minute</h2><p class="sub">Vcode is distributed as an APK from GitHub.</p><div class="steps">
+ <div class="step"><h3>Download</h3><p>Tap <b>Download APK</b> and save <code>Vcode-foss.apk</code> to your phone.</p></div>
+ <div class="step"><h3>Allow the install</h3><p>When Android asks, allow your browser or file manager to install unknown apps.</p></div>
+ <div class="step"><h3>Open and code</h3><p>Open Vcode, grant file access and start editing.</p></div></div></section></div>
+<div class="wrap faq"><section id="faq"><h2>Questions</h2><p class="sub"></p>
+ <details><summary>What is Vcode based on?</summary><p>Vcode is a modified version of Squircle CE by Blacksquircle and its contributors. It adds new languages, keyword suggestions, a new look and a build pipeline. The original license and notices are kept.</p></details>
+ <details><summary>Will it replace Squircle CE?</summary><p>No. Vcode uses its own app id (<code>com.vcode.studio</code>), so both apps can be installed side by side.</p></details>
+ <details><summary>Is it free?</summary><p>Yes. Vcode is free and open source under the Apache License 2.0.</p></details>
+ <details><summary>Android will not update over my old build. Why?</summary><p>Builds are signed with a temporary key unless a fixed release key is configured, and Android refuses updates signed with a different key. If that happens, back up your files, uninstall the old build and install the new one.</p></details>
+ <details><summary>Which Android versions are supported?</summary><p>Android 7.0 (API 24) and newer.</p></details>
+</section></div>
 </main>
-<footer>© 2026 VCode · Built for people who code everywhere.</footer>
-</div>
+<footer><div class="wrap foot">
+ <div><strong style="color:var(--text)">Vcode</strong><br>A modified version of <a href="https://github.com/massivemadness/Squircle-CE">Squircle CE</a> by Blacksquircle.<br>Licensed under Apache 2.0.</div>
+ <div class="fl"><a href="https://github.com/Christianzz4603/Vcode">Source</a><a href="https://github.com/Christianzz4603/Vcode/releases">Releases</a><a href="https://github.com/Christianzz4603/Vcode/blob/main/PRIVACY-POLICY.md">Privacy policy</a><a href="https://github.com/Christianzz4603/Vcode/blob/main/LICENSE">License</a><a href="https://github.com/Christianzz4603/Vcode/blob/main/NOTICE">Notice</a></div>
+</div></footer>
 <script>
-const repo="Christianzz4603/Vcode";
-fetch(`https://api.github.com/repos/${repo}/releases/latest`)
-.then(r=>r.ok?r.json():Promise.reject())
-.then(x=>{
- const tag=x.tag_name||"Latest";
- document.getElementById("version").textContent=tag;
- document.getElementById("releaseTitle").textContent=x.name||tag;
- const d=x.published_at?new Date(x.published_at).toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"}):"";
- document.getElementById("releaseMeta").textContent=`${d}${x.assets?.length?` · ${x.assets.length} downloadable asset${x.assets.length===1?"":"s"}`:""}`;
- document.getElementById("releaseLink").href=x.html_url;
- if(x.assets?.length){document.getElementById("download").href=x.assets[0].browser_download_url}
-})
-.catch(()=>{});
+(function(){
+ var m=document.getElementById("meta");
+ fetch("https://api.github.com/repos/Christianzz4603/Vcode/releases/latest").then(function(r){return r.ok?r.json():Promise.reject()}).then(function(x){
+  var a=(x.assets||[]).filter(function(f){return /\.apk$/i.test(f.name)})[0];
+  var parts=[];
+  if(a){document.getElementById("download").href=a.browser_download_url;parts.push(a.name);if(a.size)parts.push((a.size/1048576).toFixed(1)+" MB")}
+  if(x.published_at){parts.push("updated "+new Date(x.published_at).toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"}))}
+  if(parts.length)m.textContent=parts.join(" \u00b7 ");
+ }).catch(function(){});
+})();
 </script>
 </body>
 </html>
