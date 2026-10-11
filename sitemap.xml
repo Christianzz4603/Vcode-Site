@@ -3,4 +3,10 @@
   <url>
     <loc>https://vcode-site.pages.dev/</loc>
   </url>
+  <url><loc>https://vcode-site.pages.dev/guide</loc></url>
+  <url><loc>https://vcode-site.pages.dev/documentation</loc></url>
+  <url><loc>https://vcode-site.pages.dev/plugins</loc></url>
+  <url><loc>https://vcode-site.pages.dev/themes</loc></url>
+  <url><loc>https://vcode-site.pages.dev/languages</loc></url>
+  <url><loc>https://vcode-site.pages.dev/changelog</loc></url>
 </urlset>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-site-verification" content="9itadM5S9NBN1lYsbC3KXynMW-eQVLNw7udwaSXANdw" /><meta name="theme-color" content="#0b1428"><meta name="color-scheme" content="dark"><meta name="robots" content="noindex,nofollow">
+<title>Publish a plugin - Vcode</title><meta name="description" content="Owner-only plugin upload."><link rel="canonical" href="https://vcode-site.pages.dev/plugin/upload">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/assets/site.css">
+<meta property="og:title" content="Publish a plugin - Vcode"><meta property="og:description" content="Owner-only plugin upload."><meta property="og:url" content="https://vcode-site.pages.dev/plugin/upload"><meta property="og:type" content="website"></head>
+<body><div id="site-header"></div><main id="main"><div class="wrap"><div class="hero"><h1>Publish a <span class="grad">plugin</span></h1><p>Only the Vcode maintainer can publish. Uploads are commits to the site repository, so they need a GitHub token that belongs to the repository owner. The token stays in this browser.</p></div>
+<div class="form" style="padding-bottom:40px">
+<section id="auth"><label for="tok">GitHub token (fine-grained, repository Vcode-Site, permission Contents: read and write)</label><input id="tok" type="password" autocomplete="off" placeholder="github_pat_...">
+<label style="display:flex;gap:8px;align-items:center"><input id="rem" type="checkbox" style="width:auto"> Remember on this device</label>
+<p><button id="conn" class="btn primary" type="button">Connect</button> <button id="forget" class="btn" type="button">Forget token</button></p><p id="who" class="muted"></p></section>
+<section id="up" style="display:none"><h2 style="margin:24px 0 0">Upload</h2><label for="file">Plugin file (.zip or .json, up to 8 MB)</label><input id="file" type="file" accept=".zip,.json,application/zip,application/json">
+<div id="prev" class="note" style="display:none"></div><p><button id="pub" class="btn primary" type="button" disabled>Publish</button></p>
+<h2 style="margin:30px 0 8px">Published plugins</h2><div id="mng" class="muted">Loading...</div></section>
+<div id="log" class="log" aria-live="polite"></div></div></div></main><div id="site-footer"></div><script src="/assets/layout.js"></script><script>
+(function(){
+var REPO="Christianzz4603/Vcode-Site",OWNER="Christianzz4603",BRANCH="main",API="https://api.github.com";
+var $=function(i){return document.getElementById(i)},logEl=$("log"),state=null;
+function log(m,c){var d=document.createElement("div");if(c)d.className=c;d.textContent=m;logEl.appendChild(d)}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function token(){return sessionStorage.getItem("vcode_gh")||localStorage.getItem("vcode_gh")||""}
+function gh(p,o){o=o||{};o.headers=Object.assign({"Authorization":"Bearer "+token(),"Accept":"application/vnd.github+json"},o.headers||{});return fetch(API+p,o)}
+function b64(u8){var s="";for(var i=0;i<u8.length;i+=32768)s+=String.fromCharCode.apply(null,u8.subarray(i,i+32768));return btoa(s)}
+function text64(t){return b64(new TextEncoder().encode(t))}
+function unb64(s){var b=atob(s.replace(/\n/g,"")),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return new TextDecoder().decode(u)}
+async function getFile(path){var r=await gh("/repos/"+REPO+"/contents/"+path+"?ref="+BRANCH);if(r.status===404)return null;if(!r.ok)throw new Error("GitHub: "+r.status);return r.json()}
+async function put(path,content,msg,sha){var b={message:msg,content:content,branch:BRANCH};if(sha)b.sha=sha;var r=await gh("/repos/"+REPO+"/contents/"+path,{method:"PUT",body:JSON.stringify(b)});if(!r.ok){var e=await r.json().catch(function(){return{}});throw new Error("Could not write "+path+": "+(e.message||r.status))}return r.json()}
+async function del(path,msg){var f=await getFile(path);if(!f)return;var r=await gh("/repos/"+REPO+"/contents/"+path,{method:"DELETE",body:JSON.stringify({message:msg,sha:f.sha,branch:BRANCH})});if(!r.ok)throw new Error("Could not delete "+path)}
+async function readIndex(){var f=await getFile("data/plugins.json");return f?{sha:f.sha,data:JSON.parse(unb64(f.content))}:{sha:null,data:{plugins:[]}}}
+async function connect(t){
+ $("who").textContent="Checking token...";
+ var r=await fetch(API+"/user",{headers:{"Authorization":"Bearer "+t,"Accept":"application/vnd.github+json"}});
+ if(!r.ok){$("who").innerHTML='<span class="err">That token was not accepted.</span>';return false}
+ var u=await r.json();
+ if(u.login!==OWNER){$("who").innerHTML='<span class="err">This token belongs to '+esc(u.login)+'. Only '+OWNER+' can publish.</span>';return false}
+ sessionStorage.setItem("vcode_gh",t);if($("rem").checked)localStorage.setItem("vcode_gh",t);
+ $("who").innerHTML='<span class="ok">Connected as '+esc(u.login)+'.</span>';$("up").style.display="block";manage();return true}
+$("conn").addEventListener("click",function(){var t=$("tok").value.trim();if(!t){$("who").textContent="Paste a token first.";return}connect(t).then(function(ok){if(ok)$("tok").value=""}).catch(function(e){$("who").innerHTML='<span class="err">'+esc(e.message)+'</span>'})});
+$("forget").addEventListener("click",function(){sessionStorage.removeItem("vcode_gh");localStorage.removeItem("vcode_gh");$("up").style.display="none";$("who").textContent="Token removed from this browser."});
+if(token())connect(token()).catch(function(){});
+// ---- zip reading
+async function inflate(data){return new Response(new Blob([data]).stream().pipeThrough(new DecompressionStream("deflate-raw"))).text()}
+async function zipManifest(u){
+ var dv=new DataView(u.buffer,u.byteOffset,u.byteLength),eocd=-1;
+ for(var i=u.length-22;i>=Math.max(0,u.length-65557);i--){if(dv.getUint32(i,true)===0x06054b50){eocd=i;break}}
+ if(eocd<0)throw new Error("This is not a valid zip file");
+ var n=dv.getUint16(eocd+10,true),off=dv.getUint32(eocd+16,true),best=null;
+ for(var k=0;k<n;k++){
+  if(dv.getUint32(off,true)!==0x02014b50)break;
+  var method=dv.getUint16(off+10,true),csize=dv.getUint32(off+20,true),nl=dv.getUint16(off+28,true),el=dv.getUint16(off+30,true),cl=dv.getUint16(off+32,true),lo=dv.getUint32(off+42,true);
+  var name=new TextDecoder().decode(u.subarray(off+46,off+46+nl));
+  if(name==="plugin.json"||(!best&&/^[^\/]+\/plugin\.json$/.test(name))){best={method:method,csize:csize,lo:lo};if(name==="plugin.json")break}
+  off+=46+nl+el+cl}
+ if(!best)throw new Error("plugin.json was not found in the zip");
+ var lnl=dv.getUint16(best.lo+26,true),lel=dv.getUint16(best.lo+28,true),start=best.lo+30+lnl+lel,data=u.subarray(start,start+best.csize);
+ if(best.method===0)return new TextDecoder().decode(data);
+ if(best.method===8)return inflate(data);
+ throw new Error("Unsupported zip compression")}
+function check(m){
+ if(!/^[A-Za-z0-9._-]{3,64}$/.test(m.id||""))throw new Error("Invalid id: use 3 to 64 letters, digits, dots, dashes or underscores");
+ if(!m.name)throw new Error("The plugin has no name");
+ var t=(m.themes||[]).length,k=Object.keys(m.keywords||{}).length,e=Object.keys(m.extensions||{}).length;
+ if(t+k+e===0)throw new Error("The plugin does not contribute anything");
+ return{themes:t,keywords:k,extensions:e}}
+$("file").addEventListener("change",async function(){
+ state=null;$("pub").disabled=true;var p=$("prev");p.style.display="none";var f=this.files[0];if(!f)return;
+ try{
+  if(f.size>8*1024*1024)throw new Error("The plugin is larger than 8 MB");
+  var u=new Uint8Array(await f.arrayBuffer()),zip=u.length>3&&u[0]===0x50&&u[1]===0x4B;
+  var m=JSON.parse(zip?await zipManifest(u):new TextDecoder().decode(u));var c=check(m);
+  state={m:m,u:u,zip:zip,c:c};
+  p.style.display="block";p.innerHTML='<b>'+esc(m.name)+'</b> '+esc(m.version||"1.0.0")+' <span class="muted">('+esc(m.id)+')</span><br>'+(m.author?'by '+esc(m.author)+'<br>':'')+esc(m.description||"")+'<br>'+c.themes+' theme(s), '+c.keywords+' keyword list(s), '+c.extensions+' file type(s) &middot; '+(u.length/1024).toFixed(1)+' KB';
+  $("pub").disabled=false;
+ }catch(e){p.style.display="block";p.innerHTML='<span class="err">'+esc(e.message)+'</span>'}});
+$("pub").addEventListener("click",async function(){
+ if(!state)return;this.disabled=true;logEl.textContent="";
+ try{
+  var m=state.m,ver=String(m.version||"1.0.0"),safe=ver.replace(/[^A-Za-z0-9._-]/g,"_"),path="data/plugins/"+m.id+"-"+safe+"."+(state.zip?"zip":"json");
+  log("Uploading "+path+" ...");var ex=await getFile(path);await put(path,b64(state.u),"Add plugin "+m.name+" "+ver,ex&&ex.sha);
+  log("Updating the plugin list ...");var idx=await readIndex(),old=idx.data.plugins.filter(function(x){return x.id===m.id})[0];
+  var entry={id:m.id,name:m.name,version:ver,author:m.author||"",description:m.description||"",file:"/"+path,size:state.u.length,themes:state.c.themes,keywords:state.c.keywords,extensions:state.c.extensions,updated:new Date().toISOString()};
+  idx.data.plugins=idx.data.plugins.filter(function(x){return x.id!==m.id});idx.data.plugins.push(entry);
+  await put("data/plugins.json",text64(JSON.stringify(idx.data,null,2)+"\n"),"Update plugin list",idx.sha);
+  if(old&&old.file&&old.file!==entry.file){log("Removing the previous version ...");await del(old.file.replace(/^\//,""),"Remove old version of "+m.name)}
+  log("Done. The site redeploys in about a minute.","ok");manage();
+ }catch(e){log(e.message,"err")}finally{$("pub").disabled=false}});
+async function manage(){
+ var box=$("mng");try{var idx=await readIndex(),l=idx.data.plugins;
+  if(!l.length){box.textContent="Nothing published yet.";return}
+  box.innerHTML=l.map(function(p){return '<p style="display:flex;gap:10px;align-items:center;justify-content:space-between;margin:6px 0"><span><b>'+esc(p.name)+'</b> '+esc(p.version)+' <span class="muted">'+esc(p.id)+'</span></span><button class="btn small danger" data-id="'+esc(p.id)+'" type="button">Remove</button></p>'}).join("");
+  [].forEach.call(box.querySelectorAll("button"),function(b){b.addEventListener("click",async function(){
+   if(!confirm("Remove this plugin from the site?"))return;logEl.textContent="";
+   try{var id=b.getAttribute("data-id"),cur=await readIndex(),p=cur.data.plugins.filter(function(x){return x.id===id})[0];
+    cur.data.plugins=cur.data.plugins.filter(function(x){return x.id!==id});
+    await put("data/plugins.json",text64(JSON.stringify(cur.data,null,2)+"\n"),"Remove plugin "+id,cur.sha);
+    if(p&&p.file)await del(p.file.replace(/^\//,""),"Remove plugin file "+id);
+    log("Removed "+id+".","ok");manage()}catch(e){log(e.message,"err")}})})
+ }catch(e){box.textContent="Could not load the list: "+e.message}}
+})();
+</script></body></html>

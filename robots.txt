@@ -2,3 +2,7 @@ User-agent: *
 Allow: /
 
 Sitemap: https://vcode-site.pages.dev/sitemap.xml
+
+User-agent: *
+Disallow: /plugin/upload
+Disallow: /plugin/u

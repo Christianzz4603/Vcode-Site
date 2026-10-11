@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-site-verification" content="9itadM5S9NBN1lYsbC3KXynMW-eQVLNw7udwaSXANdw" /><meta name="theme-color" content="#0b1428"><meta name="color-scheme" content="dark">
+<title>Plugins - Vcode</title><meta name="description" content="Themes, keyword suggestions and file types for Vcode, published by the maintainer."><link rel="canonical" href="https://vcode-site.pages.dev/plugins">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/assets/site.css">
+<meta property="og:title" content="Plugins - Vcode"><meta property="og:description" content="Themes, keyword suggestions and file types for Vcode, published by the maintainer."><meta property="og:url" content="https://vcode-site.pages.dev/plugins"><meta property="og:type" content="website"></head>
+<body><div id="site-header"></div><main id="main"><div class="wrap"><div class="hero"><h1><span class="grad">Plugins</span> for Vcode</h1><p>Themes, keyword suggestions and file types, published by the Vcode maintainer. Plugins are data only, so they cannot run code. Download one, then open Settings &gt; Plugins &gt; Install plugin in the app. Want to make your own? Read the <a href="/documentation#plugins" style="color:var(--c1)">plugin format</a>.</p></div>
+<div style="max-width:420px;margin:18px 0 0"><input id="q" type="search" placeholder="Search plugins" aria-label="Search plugins"></div>
+<div id="list" class="grid"><p class="muted">Loading...</p></div></div></main><div id="site-footer"></div><script src="/assets/layout.js"></script><script>
+(function(){
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var all=[],list=document.getElementById("list"),q=document.getElementById("q");
+function tags(p){var t=[];if(p.themes)t.push(p.themes+" theme"+(p.themes>1?"s":""));if(p.keywords)t.push(p.keywords+" keyword list"+(p.keywords>1?"s":""));if(p.extensions)t.push(p.extensions+" file type"+(p.extensions>1?"s":""));return t.map(function(x){return '<span class="tag">'+esc(x)+'</span>'}).join("")}
+function render(){var v=q.value.trim().toLowerCase();var items=all.filter(function(p){return !v||(p.name+" "+p.author+" "+p.description+" "+p.id).toLowerCase().indexOf(v)>-1});
+ if(!items.length){list.innerHTML='<p class="muted">'+(all.length?'No plugins match your search.':'No plugins yet. Check back soon.')+'</p>';return}
+ list.innerHTML=items.map(function(p){return '<article class="card"><h3>'+esc(p.name)+' <span class="muted" style="font-weight:400;font-size:14px">'+esc(p.version)+'</span></h3><p>'+esc(p.description)+'</p><p class="muted">'+(p.author?'by '+esc(p.author)+' &middot; ':'')+(p.size?(p.size/1024).toFixed(1)+' KB':'')+'</p><div>'+tags(p)+'</div><div class="row"><a class="btn primary small" href="'+esc(p.file)+'" download>Download</a><a class="btn small" href="/plugin?id='+encodeURIComponent(p.id)+'">Details</a></div></article>'}).join("")}
+q.addEventListener("input",render);
+fetch("/data/plugins.json?"+Date.now()).then(function(r){return r.ok?r.json():Promise.reject()}).then(function(d){all=(d.plugins||[]).sort(function(a,b){return String(b.updated).localeCompare(String(a.updated))});render()}).catch(function(){list.innerHTML='<p class="muted">Could not load the plugin list.</p>'});
+})();
+</script></body></html>

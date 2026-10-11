@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-site-verification" content="9itadM5S9NBN1lYsbC3KXynMW-eQVLNw7udwaSXANdw" /><meta name="theme-color" content="#0b1428"><meta name="color-scheme" content="dark">
+<title>Plugin - Vcode</title><meta name="description" content="Plugin details for Vcode."><link rel="canonical" href="https://vcode-site.pages.dev/plugin">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/assets/site.css">
+<meta property="og:title" content="Plugin - Vcode"><meta property="og:description" content="Plugin details for Vcode."><meta property="og:url" content="https://vcode-site.pages.dev/plugin"><meta property="og:type" content="website"></head>
+<body><div id="site-header"></div><main id="main"><div class="wrap"><div id="d" style="max-width:760px;padding:30px 0"><p class="muted">Loading...</p></div></div></main><div id="site-footer"></div><script src="/assets/layout.js"></script><script>
+(function(){
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var id=new URLSearchParams(location.search).get("id"),d=document.getElementById("d");
+function nf(){d.innerHTML='<h1>Plugin not found</h1><p><a href="/plugins" style="color:var(--c1)">Back to all plugins</a></p>'}
+if(!id){nf();return}
+fetch("/data/plugins.json?"+Date.now()).then(function(r){return r.json()}).then(function(data){
+ var p=(data.plugins||[]).filter(function(x){return x.id===id})[0]; if(!p){nf();return}
+ document.title=p.name+" - Vcode plugin";
+ var rows=[];if(p.themes)rows.push("<li><b>"+p.themes+"</b> theme(s)</li>");if(p.keywords)rows.push("<li><b>"+p.keywords+"</b> keyword list(s)</li>");if(p.extensions)rows.push("<li><b>"+p.extensions+"</b> file type(s)</li>");
+ d.innerHTML='<p><a href="/plugins" style="color:var(--c1)">&larr; All plugins</a></p><h1 style="margin:6px 0">'+esc(p.name)+' <span class="muted" style="font-size:18px;font-weight:400">'+esc(p.version)+'</span></h1><p class="muted">'+(p.author?'by '+esc(p.author)+' &middot; ':'')+'id <code>'+esc(p.id)+'</code> &middot; '+(p.size/1024).toFixed(1)+' KB &middot; updated '+esc(new Date(p.updated).toLocaleDateString())+'</p><p>'+esc(p.description)+'</p><h3>Adds</h3><ul>'+rows.join("")+'</ul><p><a class="btn primary" href="'+esc(p.file)+'" download>Download</a></p><h3>Install</h3><ol class="steps"><li>Download the file to your phone.</li><li>Open Vcode, then Settings &gt; Plugins &gt; Install plugin.</li><li>Pick the downloaded file. Turn the plugin on or off with its switch.</li></ol><div class="note">Plugins are data only and cannot run code. Themes appear in Settings &gt; Application &gt; Color scheme. Keyword suggestions and file types apply to files you open afterwards.</div><div id="m"></div>';
+ if(/\.json$/i.test(p.file)){fetch(p.file).then(function(r){return r.text()}).then(function(t){document.getElementById("m").innerHTML='<h3>plugin.json</h3><pre><code>'+esc(t)+'</code></pre>'}).catch(function(){})}
+}).catch(nf);
+})();
+</script></body></html>

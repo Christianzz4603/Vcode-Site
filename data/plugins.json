@@ -1,0 +1,30 @@
+{
+  "plugins": [
+    {
+      "id": "example.neon-pack",
+      "name": "Neon Pack",
+      "version": "1.0.0",
+      "author": "Vcode",
+      "description": "A neon theme and a few web keywords",
+      "file": "/data/plugins/example.neon-pack-1.0.0.zip",
+      "size": 2014,
+      "themes": 1,
+      "keywords": 1,
+      "extensions": 1,
+      "updated": "2026-10-11T01:30:07Z"
+    },
+    {
+      "id": "example.web-extras",
+      "name": "Web Extras",
+      "version": "1.0.0",
+      "author": "Vcode",
+      "description": "Extra file types and browser keywords",
+      "file": "/data/plugins/example.web-extras-1.0.0.json",
+      "size": 556,
+      "themes": 0,
+      "keywords": 2,
+      "extensions": 4,
+      "updated": "2026-10-11T01:30:07Z"
+    }
+  ]
+}
