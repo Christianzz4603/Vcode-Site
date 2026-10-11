@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-site-verification" content="9itadM5S9NBN1lYsbC3KXynMW-eQVLNw7udwaSXANdw" /><meta name="theme-color" content="#0b1428"><meta name="color-scheme" content="dark">
+<title>Changelog - Vcode</title><meta name="description" content="Latest Vcode build and recent changes."><link rel="canonical" href="https://vcode-site.pages.dev/changelog">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/assets/site.css">
+<meta property="og:title" content="Changelog - Vcode"><meta property="og:description" content="Latest Vcode build and recent changes."><meta property="og:url" content="https://vcode-site.pages.dev/changelog"><meta property="og:type" content="website"></head>
+<body><div id="site-header"></div><main id="main"><div class="wrap"><div class="hero"><h1>Change<span class="grad">log</span></h1><p>The latest build and recent changes, loaded from GitHub.</p></div>
+<div id="latest" class="card" style="max-width:640px"><p class="muted">Loading...</p></div>
+<h2 style="margin:30px 0 10px">Recent changes</h2><div id="commits" class="muted">Loading...</div></div></main><div id="site-footer"></div><script src="/assets/layout.js"></script><script>
+(function(){
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+fetch("https://api.github.com/repos/Christianzz4603/Vcode/releases/latest").then(function(r){return r.ok?r.json():Promise.reject()}).then(function(x){
+ var a=(x.assets||[])[0]; var d=x.published_at?new Date(x.published_at).toLocaleString():"";
+ document.getElementById("latest").innerHTML='<h3>'+esc(x.name||x.tag_name)+'</h3><p>'+esc(x.body||"")+'</p><p class="muted">'+esc(d)+(a?' &middot; '+(a.size/1048576).toFixed(1)+' MB':'')+'</p>'+(a?'<div class="row"><a class="btn primary" href="'+esc(a.browser_download_url)+'">Download '+esc(a.name)+'</a></div>':'');
+}).catch(function(){document.getElementById("latest").innerHTML='<p class="muted">Could not load the latest build. See the <a href="https://github.com/Christianzz4603/Vcode/releases" style="color:var(--c1)">releases page</a>.</p>'});
+fetch("https://api.github.com/repos/Christianzz4603/Vcode/commits?per_page=30").then(function(r){return r.ok?r.json():Promise.reject()}).then(function(list){
+ var html="",last="";
+ list.forEach(function(c){var day=new Date(c.commit.author.date).toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"});
+  if(day!==last){html+='<h3 style="margin:18px 0 6px">'+esc(day)+'</h3>';last=day}
+  html+='<p style="margin:4px 0"><a href="'+esc(c.html_url)+'" style="color:var(--c1)"><code>'+esc(c.sha.slice(0,7))+'</code></a> '+esc(c.commit.message.split("\n")[0])+'</p>'});
+ document.getElementById("commits").innerHTML=html||"No commits found.";
+}).catch(function(){document.getElementById("commits").innerHTML='See the <a href="https://github.com/Christianzz4603/Vcode/commits/main" style="color:var(--c1)">commit history</a> on GitHub.'});
+})();
+</script></body></html>

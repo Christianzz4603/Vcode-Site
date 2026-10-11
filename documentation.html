@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-site-verification" content="9itadM5S9NBN1lYsbC3KXynMW-eQVLNw7udwaSXANdw" /><meta name="theme-color" content="#0b1428"><meta name="color-scheme" content="dark">
+<title>Documentation - Vcode</title><meta name="description" content="Vcode documentation: features, settings, themes, languages, plugin format and building from source."><link rel="canonical" href="https://vcode-site.pages.dev/documentation">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/assets/site.css">
+<meta property="og:title" content="Documentation - Vcode"><meta property="og:description" content="Vcode documentation: features, settings, themes, languages, plugin format and building from source."><meta property="og:url" content="https://vcode-site.pages.dev/documentation"><meta property="og:type" content="website"></head>
+<body><div id="site-header"></div><main id="main"><div class="wrap"><div class="hero"><h1>Docu<span class="grad">mentation</span></h1><p>Features, settings, themes, languages and the plugin format. New to Vcode? Start with the <a href="/guide" style="color:var(--c1)">guide</a>.</p></div>
+<div class="doc"><aside class="toc" aria-label="On this page"><a href="#intro">What is Vcode?</a><a href="#install">Installing and updating</a><a href="#editor">The editor</a><a href="#themes">Themes</a><a href="#settings">Settings reference</a><a href="#plugins">Plugins</a><a href="#build">Building from source</a><a href="#credits">Credits and license</a></aside><article class="prose">
+<h2 id="intro">What is Vcode?</h2>
+<p>Vcode is a fast, free and open source code editor and file manager for Android. It is a modified version of <a href="https://github.com/massivemadness/Squircle-CE">Squircle CE</a> by Blacksquircle and is published under the Apache 2.0 license.</p>
+<ul><li>Requires Android 7.0 (API 24) or newer.</li><li>App id: <code>com.vcode.studio</code>, so it installs next to the original Squircle CE.</li><li>Source code and releases: <a href="https://github.com/Christianzz4603/Vcode">github.com/Christianzz4603/Vcode</a>.</li></ul>
+<h2 id="install">Installing and updating</h2>
+<ol class="steps"><li><b>Download</b> <code>Vcode-foss.apk</code> from the <a href="/download">download link</a> or the <a href="https://github.com/Christianzz4603/Vcode/releases">releases page</a>.</li><li><b>Allow the install</b> when Android asks you to let your browser or file manager install unknown apps.</li><li><b>Open Vcode</b> and grant access to your files when it asks.</li></ol>
+<div class="note">Builds are signed with a temporary key unless a fixed release key is configured. Android refuses to update an app over a build signed with a different key. If that happens, back up your files, uninstall the old build and install the new one.</div>
+<h2 id="editor">The editor</h2>
+<h3>Tabs</h3>
+<p>Each open file has a tab with an icon for its language. A blue dot in place of the close button means the file has unsaved changes. Tap the selected tab to open a menu with close, close others and close all. Tabs can be reordered by dragging.</p>
+<h3>Languages</h3>
+<p>Vcode highlights 49 languages, including Kotlin, Java, Python, JavaScript, TypeScript, C, C++, C#, Go, Rust, Swift, PHP, Ruby, SQL, HTML, CSS, SCSS, Markdown and more. See the <a href="/languages">full list with file extensions</a>. Plugins can map extra file extensions to these languages.</p>
+<h3>Keyword suggestions</h3>
+<p>While you type, a small box suggests keywords for the language of the file plus words that already appear in the file. For example, type <code>imp</code> and tap <code>import</code>. Plugins can add their own words per language.</p>
+<h3>Saving</h3>
+<p>Turn on <b>Auto save</b> in Settings &gt; Editor to save files automatically. <b>Auto save delay</b> chooses when: when you switch tabs or leave the app, or 1, 3 or 10 seconds after you stop typing.</p>
+<h3>Cursor and text</h3>
+<ul><li><b>Cursor style</b>: thin, normal or thick.</li><li><b>Smooth cursor animation</b>: animates the cursor when it moves (off by default).</li><li><b>Font ligatures</b>: joins characters like <code>=&gt;</code> and <code>!=</code> when the font supports it (on by default).</li></ul>
+<h2 id="themes">Themes</h2>
+<p>Vcode ships 15 themes: Vcode Dark, Dark+, Light+, One Dark, GitHub Dark, Dracula, Darcula, Eclipse, Monokai, Obsidian, IntelliJ Light, Ladies Night, Tomorrow Night, Solarized Light, Visual Studio. Pick one in <b>Settings &gt; Application &gt; Color scheme</b>. A theme colors the whole app, not only the code. <b>Vcode Dark</b> is the default. Plugins can add more themes. See all of them on the <a href="/themes">themes page</a>.</p>
+<h2 id="settings">Settings reference</h2>
+<div class="tw"><table><tr><th>Section</th><th>What is inside</th></tr>
+<tr><td>Application</td><td>Color scheme, fullscreen mode, confirm exit.</td></tr>
+<tr><td>Editor</td><td>Cursor style, smooth cursor animation, font ligatures, auto save and auto save delay, read-only mode, soft keyboard and other editing and display options.</td></tr>
+<tr><td>Code style</td><td>Font and text options such as font size, font type and tab width.</td></tr>
+<tr><td>Files</td><td>Options for the file manager.</td></tr>
+<tr><td>Terminal</td><td>Options for the built-in terminal.</td></tr>
+<tr><td>Keybindings</td><td>Keyboard shortcuts.</td></tr>
+<tr><td>Cloud</td><td>Remote servers for browsing and editing files over SFTP and FTP(S).</td></tr>
+<tr><td>Git</td><td>Your Git user name and email, and credentials.</td></tr>
+<tr><td>Plugins</td><td>Install, turn on or off, and remove plugins.</td></tr>
+<tr><td>About</td><td>Version, privacy policy, website and contribution links.</td></tr></table></div>
+<h2 id="plugins">Plugins</h2>
+<p>Plugins add themes, keyword suggestions and file types. A plugin is <b>data only</b>: it contains no code, so installing one cannot run anything on your phone. Browse the plugins published for Vcode on the <a href="/plugins">plugins page</a>.</p>
+<h3>Install a plugin</h3>
+<ol><li>Open <b>Settings &gt; Plugins</b>.</li><li>Tap <b>Install plugin</b> and pick a <code>.zip</code> or <code>.json</code> file.</li><li>Use the switch to turn it on or off, or <b>Remove</b> to delete it.</li></ol>
+<p>Themes show up in the color scheme list right away. Keyword suggestions and file types apply to files you open afterwards.</p>
+<h3>Plugin format</h3>
+<p>A plugin is a single <code>plugin.json</code> file, or a <code>.zip</code> with <code>plugin.json</code> at the top level (or inside one top-level folder) plus the theme files it uses.</p>
+<pre><code>{
+  "id": "example.neon-pack",
+  "name": "Neon Pack",
+  "version": "1.0.0",
+  "author": "Your name",
+  "description": "A neon theme and a few web keywords",
+  "themes": ["themes/neon.json"],
+  "keywords": { "javascript": ["requestAnimationFrame", "IntersectionObserver"] },
+  "extensions": { ".mjs": "javascript" }
+}</code></pre>
+<div class="tw"><table><tr><th>Field</th><th>Required</th><th>Notes</th></tr>
+<tr><td><code>id</code></td><td>yes</td><td>3 to 64 characters: letters, digits, <code>.</code>, <code>-</code>, <code>_</code>. Installing the same id again replaces the plugin.</td></tr>
+<tr><td><code>name</code></td><td>yes</td><td>Shown in the plugin list.</td></tr>
+<tr><td><code>version</code>, <code>author</code>, <code>description</code></td><td>no</td><td>Shown in the plugin list.</td></tr>
+<tr><td><code>themes</code></td><td>no</td><td>List of theme JSON files, relative to <code>plugin.json</code>.</td></tr>
+<tr><td><code>keywords</code></td><td>no</td><td>Object: language name to a list of words (up to 5000 per language, each up to 64 characters).</td></tr>
+<tr><td><code>extensions</code></td><td>no</td><td>Object: file extension with the dot to a language name.</td></tr></table></div>
+<p>At least one of <code>themes</code>, <code>keywords</code> or <code>extensions</code> is required. Language names are the ones from <a href="https://github.com/Christianzz4603/Vcode/blob/main/feature-editor/impl/src/main/assets/languages.json">languages.json</a>, for example <code>javascript</code>, <code>python</code>, <code>kotlin</code>, <code>cpp</code>, <code>html</code>, <code>css</code>, <code>markdown</code>, <code>swift</code>, <code>rust</code>, <code>go</code>.</p>
+<h3>Theme files</h3>
+<p>A theme file has a <code>name</code>, a <code>type</code> (<code>"dark"</code> or <code>"light"</code>), a <code>colors</code> object and optional <code>tokenColors</code> (TextMate scopes for syntax highlighting). Start by copying <a href="https://github.com/Christianzz4603/Vcode/blob/main/feature-themes/impl/src/main/assets/themes/vcode_dark.json">vcode_dark.json</a> and changing the colors. Every theme needs all of these keys as <code>#RRGGBB</code>:</p>
+<pre><code>global.colorPrimary
+global.colorOutline
+global.colorBackgroundPrimary
+global.colorBackgroundSecondary
+global.colorBackgroundTertiary
+global.colorTextAndIconPrimary
+global.colorTextAndIconPrimaryInverse
+global.colorTextAndIconSecondary
+global.colorTextAndIconDisabled
+global.colorTextAndIconAdditional
+global.colorTextAndIconSuccess
+global.colorTextAndIconError
+editor.background
+editor.foreground
+editor.whitespace
+editor.cursor
+editor.handle
+editor.selection.background
+editor.currentLine.background
+editor.highlightedDelimiters.background
+editor.highlightedDelimiters.foreground
+editor.matchHighlight.background
+editor.lineNumber.divider
+editor.lineNumber.background
+editor.lineNumber.foreground
+editor.lineNumber.activeForeground
+editor.indentGuide.background
+editor.indentGuide.activeBackground
+editor.popupWindow.corner
+editor.popupWindow.background
+editor.popupWindow.activeBackground</code></pre>
+<p>If a color is missing, the plugin is rejected with a message that names the file and the color.</p>
+<h3>Limits</h3>
+<ul><li>Up to 8 MB per plugin and 200 files in a <code>.zip</code>.</li><li>File paths inside a <code>.zip</code> must stay inside the plugin folder.</li></ul>
+<p>Examples: <a href="https://github.com/Christianzz4603/Vcode/tree/main/examples/plugins">examples/plugins</a> in the repository. Zip the <b>contents</b> of a plugin folder, so that <code>plugin.json</code> is at the top, then install the <code>.zip</code>.</p>
+<h2 id="build">Building from source</h2>
+<p>You need JDK 17, about 1.1 GB of free disk space and 4 GB of RAM.</p>
+<pre><code>git clone --recursive --depth=1 --shallow-submodules https://github.com/Christianzz4603/Vcode Vcode
+cd Vcode
+./gradlew :app:assembleFossRelease</code></pre>
+<p>Create a <code>local.properties</code> file with <code>KEYSTORE_PATH</code>, <code>KEYSTORE_PASSWORD</code>, <code>KEY_ALIAS</code> and <code>KEY_PASSWORD</code> to sign the release build. The repository also contains a GitHub Actions workflow that builds the FOSS APK and publishes it on every push to <code>main</code>.</p>
+<h2 id="credits">Credits and license</h2>
+<p>Vcode is built on <a href="https://github.com/massivemadness/Squircle-CE">Squircle CE</a> by Blacksquircle and its contributors, and on the <a href="https://github.com/Rosemoe/sora-editor">sora-editor</a> component library. It is licensed under the <a href="https://github.com/Christianzz4603/Vcode/blob/main/LICENSE">Apache License 2.0</a>. See the <a href="https://github.com/Christianzz4603/Vcode/blob/main/NOTICE">NOTICE</a> file for the list of modifications and the <a href="https://github.com/Christianzz4603/Vcode/blob/main/PRIVACY-POLICY.md">privacy policy</a>.</p>
+</article></div></div></main><div id="site-footer"></div><script src="/assets/layout.js"></script></body></html>
