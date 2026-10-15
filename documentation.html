@@ -11,7 +11,7 @@
 <ul><li>Requires Android 7.0 (API 24) or newer.</li><li>App id: <code>com.vcode.studio</code>, so it installs next to the original Squircle CE.</li><li>Source code and releases: <a href="https://github.com/Christianzz4603/Vcode">github.com/Christianzz4603/Vcode</a>.</li></ul>
 <h2 id="install">Installing and updating</h2>
 <ol class="steps"><li><b>Download</b> <code>Vcode-foss.apk</code> from the <a href="/download">download link</a> or the <a href="https://github.com/Christianzz4603/Vcode/releases">releases page</a>.</li><li><b>Allow the install</b> when Android asks you to let your browser or file manager install unknown apps.</li><li><b>Open Vcode</b> and grant access to your files when it asks.</li></ol>
-<div class="note">Builds are signed with a temporary key unless a fixed release key is configured. Android refuses to update an app over a build signed with a different key. If that happens, back up your files, uninstall the old build and install the new one.</div>
+<div class="note">Builds before version 1.5.1 were each signed with a different temporary key, so Android refuses to update over them ("conflict with an existing package"). Uninstall the old build once (back up your files first) and install the new one. From 1.5.1 on, every build is signed with the same key, so updates install over each other.</div>
 <h2 id="editor">The editor</h2>
 <h3>Tabs</h3>
 <p>Each open file has a tab with an icon for its language. A blue dot in place of the close button means the file has unsaved changes. Tap the selected tab to open a menu with close, close others and close all. Tabs can be reordered by dragging.</p>

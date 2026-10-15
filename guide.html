@@ -19,7 +19,7 @@
 <h2>Tips</h2>
 <ul><li>Tap the selected tab for a menu to close the tab, close others or close all.</li><li>Pinch to zoom the text if pinch zoom is enabled in the editor settings.</li><li>Vcode installs next to Squircle CE, so you can keep both.</li></ul>
 <h2>Troubleshooting</h2>
-<details class="note"><summary><b>Android will not update my old Vcode build</b></summary><p>Builds are signed with a temporary key unless a fixed key is configured, and Android blocks updates signed with a different key. Back up your files, uninstall the old build and install the new one.</p></details>
+<details class="note"><summary><b>Android will not update my old Vcode build</b></summary><p>Builds before version 1.5.1 were each signed with a different temporary key, so Android refuses to update over them ("conflict with an existing package"). Uninstall the old build once (back up your files first) and install the new one. From 1.5.1 on, every build is signed with the same key, so updates install over each other.</p></details>
 <details class="note"><summary><b>A plugin was rejected</b></summary><p>The message names the problem. The most common one is a theme file that is missing a color. Compare it with <a href="/documentation#plugins">the list of required colors</a>.</p></details>
 <details class="note"><summary><b>A plugin theme disappeared</b></summary><p>Themes from a plugin are only available while the plugin is installed and turned on. If you remove it while it is the active theme, Vcode switches back to Vcode Dark.</p></details>
 <details class="note"><summary><b>Keyword suggestions or file types from a plugin do not show up</b></summary><p>They apply to files you open after installing or turning on the plugin. Close the file and open it again.</p></details>
