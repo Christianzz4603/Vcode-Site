@@ -95,7 +95,7 @@ h2.title{font-size:clamp(1.8rem,4.2vw,2.8rem);line-height:1.1;letter-spacing:-.0
 .rbtn{width:2.8rem;height:2.8rem;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);font-size:1.1rem;cursor:pointer;transition:border-color .2s,background .2s}.rbtn:hover{border-color:#34508a;background:rgba(255,255,255,.07)}
 .rail{display:flex;gap:1.3rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.6rem max(1.25rem,calc((100vw - var(--maxw))/2 + 1.25rem)) 1.6rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}.rail::-webkit-scrollbar{display:none}
 .shot{flex:none;scroll-snap-align:center;width:15.5rem;margin:0}.shot figcaption{margin-top:1rem;text-align:center}.shot figcaption b{display:block;font-size:1rem}.shot figcaption span{color:var(--muted);font-size:.85rem}
-.phone{border:.42rem solid #15213f;border-radius:2rem;background:#0b1428;aspect-ratio:9/17.5;overflow:hidden;box-shadow:0 1.8rem 3.5rem rgba(0,0,0,.45);transition:transform .35s,box-shadow .35s}.shot:hover .phone{transform:translateY(-.5rem);box-shadow:0 2.4rem 4rem rgba(14,100,240,.25)}
+.phone{border:.42rem solid #15213f;border-radius:2rem;background:#0b1428;aspect-ratio:9/19.5;overflow:hidden;box-shadow:0 1.8rem 3.5rem rgba(0,0,0,.45);transition:transform .35s,box-shadow .35s}.shot:hover .phone{transform:translateY(-.5rem);box-shadow:0 2.4rem 4rem rgba(14,100,240,.25)}
 .ph{display:flex;flex-direction:column;height:100%;font:.6rem/1.55 ui-monospace,Menlo,Consolas,monospace;color:var(--text)}
 .pbar{display:flex;align-items:center;gap:.4rem;padding:.7rem .75rem .5rem;border-bottom:1px solid var(--line);color:var(--muted)}.pbar b{color:var(--text);font-weight:700}
 .ptabs{display:flex;border-bottom:1px solid var(--line)}.ptabs i{font-style:normal;padding:.4rem .65rem;color:var(--muted);white-space:nowrap}.ptabs i.on{color:var(--text);background:#0f1a33;box-shadow:inset 0 -2px var(--c2)}
@@ -136,3 +136,4 @@ h2.title{font-size:clamp(1.8rem,4.2vw,2.8rem);line-height:1.1;letter-spacing:-.0
 @media(min-width:2500px){html{font-size:30px}}
 html.tv{scroll-behavior:auto}html.tv :focus-visible{outline:.22rem solid var(--c1);outline-offset:.25rem;box-shadow:0 0 0 .5rem rgba(62,198,253,.22)}html.tv .btn:focus-visible{transform:scale(1.06)}html.tv .editor,html.tv .orb,html.tv .track{animation:none}html.tv .js .rv{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.js .rv{opacity:1;transform:none}.track{width:auto;flex-wrap:wrap}.marq{-webkit-mask-image:none;mask-image:none}}
+.phone img{display:block;width:100%;height:100%;object-fit:cover;background:#0b1428}
