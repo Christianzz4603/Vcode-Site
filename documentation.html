@@ -27,19 +27,20 @@
 <p>As you type, Vcode suggests keywords, functions and classes for the language of the file, together with words that already appear in the file. Type <code>imp</code> and tap <code>import</code>.</p>
 <ul><li>Built-in sets: JavaScript, TypeScript, Kotlin, Java, Python, HTML, XML (including Android) and shell.</li><li>The suggestion data lives in <code>assets/intellisense/*.json</code> in the source code, so you can add your own language.</li><li>Plugins can add keyword lists for more languages, see <a href="#plugins">Plugins</a>.</li></ul>
 <h2 id="panel">Bottom panel</h2>
-<p>The bottom panel has four tabs: <b>Problems</b>, <b>Output</b>, <b>Preview</b> and <b>Run</b>. Drag its edge to resize it, or open it full screen when you need room.</p>
-<ul><li><b>Run</b> can run JavaScript and shell scripts inside the app. For other languages, use <a href="#run">Run in Termux</a>.</li><li><b>Output</b> shows what your script prints.</li><li><b>Preview</b> shows web content in a built-in view.</li><li><b>Problems</b> lists the problems found in the open file.</li></ul>
+<p>The bottom panel has <b>Problems</b>, <b>Output</b>, <b>Preview</b> and <b>AI</b> tabs. Drag its handle to resize it, or use <b>Full screen</b> when you need room.</p>
+<ul><li><b>Output</b> shows what your script prints and ends with the exit code, for example <code>Process finished with exit code 0</code>.</li><li><b>Preview</b> shows web content in a built-in view.</li><li><b>Problems</b> lists the problems found in the open file.</li><li><b>AI</b> is the <a href="#ai">AI assistant</a>.</li></ul>
 <h2 id="tools">Tools bar</h2>
-<p>The tools bar sits above the row of symbol keys (<code>{ } ( ) &lt; &gt;</code>) and holds quick actions such as Run and the panel tabs.</p>
-<ul><li>Drag a tool to change its position.</li><li>Hide the tools you do not use.</li></ul>
+<p>The tools bar sits above the row of symbol keys (<code>{ } ( ) &lt; &gt;</code>). It holds <b>Run</b>, <b>Termux</b>, <b>Preview</b>, <b>Output</b>, <b>Problems</b>, <b>AI</b>, <b>Full screen</b> and <b>Hide</b>.</p>
+<ul><li><b>Run</b> runs JavaScript and shell scripts inside the app. For other languages use <b>Termux</b>, see <a href="#run">Run in Termux</a>.</li><li>Drag a tool to change its position.</li><li>Hide the tools you do not use.</li></ul>
 <h2 id="run">Run in Termux</h2>
 <p>Vcode does not bundle a terminal. To compile or run other languages, it hands the command to the real <a href="https://termux.dev">Termux</a> app, so you can use any package you install there (for example <code>python</code>, <code>clang</code> or <code>nodejs</code>).</p>
 <ol class="steps"><li>Install Termux (the F-Droid or GitHub build) and open it once.</li><li>In Termux, allow other apps to run commands, then restart Termux:<pre><code>mkdir -p ~/.termux
-echo "allow-external-apps = true" &gt;&gt; ~/.termux/termux.properties</code></pre></li><li>In Vcode, use <b>Run in Termux</b>. If Android asks for the Termux run-commands permission, allow it.</li></ol>
+echo "allow-external-apps = true" &gt;&gt; ~/.termux/termux.properties</code></pre></li><li>In Vcode, tap <b>Termux</b> in the tools bar. If Android asks for the Termux run-commands permission, allow it.</li></ol>
 <div class="note">Android 10 and newer do not let apps run downloaded programs from their own storage, which is why Vcode uses the Termux app instead of shipping its own copy.</div>
 <h2 id="ai">AI assistant</h2>
 <p>The AI tab lets you ask questions about your code. Answers stream in as they are written.</p>
 <ol class="steps"><li>Create an API key at <a href="https://openrouter.ai">OpenRouter</a>.</li><li>In Vcode, open <b>Settings</b>, then <b>AI assistant</b>, and add the key.</li><li>Open the <b>AI</b> tab and ask your question.</li></ol>
+<p>Quick actions: <b>Explain</b>, <b>Fix problems</b>, <b>Refactor</b> and <b>Clear</b>. Under each answer, <b>Copy</b> copies it and <b>Insert code at cursor</b> puts its code into your file.</p>
 <div class="note">You pay your own OpenRouter usage. The key is stored in the app settings on your device without extra encryption, so use a key with a spending limit.</div>
 <h2 id="themes">Themes</h2>
 <p>Vcode ships 15 themes: Vcode Dark, Dark+, Light+, One Dark, GitHub Dark, Dracula, Darcula, Eclipse, Monokai, Obsidian, IntelliJ Light, Ladies Night, Tomorrow Night, Solarized Light, Visual Studio. Pick one in <b>Settings &gt; Application &gt; Color scheme</b>. A theme colors the whole app, not only the code. <b>Vcode Dark</b> is the default. Plugins can add more themes. See all of them on the <a href="/themes">themes page</a>.</p>
