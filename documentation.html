@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="google-site-verification" content="9itadM5S9NBN1lYsbC3KXynMW-eQVLNw7udwaSXANdw" /><meta name="theme-color" content="#0b1428"><meta name="color-scheme" content="dark">
-<title>Documentation - Vcode</title><meta name="description" content="Vcode documentation: features, settings, themes, languages, plugin format and building from source."><link rel="canonical" href="https://vcode-site.pages.dev/documentation">
+<title>Documentation - Vcode</title><meta name="description" content="Vcode documentation: IntelliSense, panel, Run in Termux, AI assistant, settings, themes, languages, plugin format and building from source."><link rel="canonical" href="https://vcode-site.pages.dev/documentation">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/assets/site.css">
-<meta property="og:title" content="Documentation - Vcode"><meta property="og:description" content="Vcode documentation: features, settings, themes, languages, plugin format and building from source."><meta property="og:url" content="https://vcode-site.pages.dev/documentation"><meta property="og:type" content="website"></head>
-<body><div id="site-header"></div><main id="main"><div class="wrap"><div class="hero"><h1>Docu<span class="grad">mentation</span></h1><p>Features, settings, themes, languages and the plugin format. New to Vcode? Start with the <a href="/guide" style="color:var(--c1)">guide</a>.</p></div>
-<div class="doc"><aside class="toc" aria-label="On this page"><a href="#intro">What is Vcode?</a><a href="#install">Installing and updating</a><a href="#editor">The editor</a><a href="#themes">Themes</a><a href="#settings">Settings reference</a><a href="#plugins">Plugins</a><a href="#build">Building from source</a><a href="#credits">Credits and license</a></aside><article class="prose">
+<meta property="og:title" content="Documentation - Vcode"><meta property="og:description" content="Vcode documentation: IntelliSense, panel, Run in Termux, AI assistant, settings, themes, languages, plugin format and building from source."><meta property="og:url" content="https://vcode-site.pages.dev/documentation"><meta property="og:type" content="website"></head>
+<body><div id="site-header"></div><main id="main"><div class="wrap"><div class="hero"><h1>Docu<span class="grad">mentation</span></h1><p>Editor features, the bottom panel, Run in Termux, the AI assistant, settings, themes, languages and the plugin format. New to Vcode? Start with the <a href="/guide" style="color:var(--c1)">guide</a>.</p></div>
+<div class="doc"><aside class="toc" aria-label="On this page"><a href="#intro">What is Vcode?</a><a href="#install">Installing and updating</a><a href="#editor">The editor</a><a href="#intellisense">IntelliSense</a><a href="#panel">Bottom panel</a><a href="#tools">Tools bar</a><a href="#run">Run in Termux</a><a href="#ai">AI assistant</a><a href="#themes">Themes</a><a href="#settings">Settings reference</a><a href="#plugins">Plugins</a><a href="#build">Building from source</a><a href="#credits">Credits and license</a></aside><article class="prose">
 <h2 id="intro">What is Vcode?</h2>
 <p>Vcode is a fast, free and open source code editor and file manager for Android. It is a modified version of <a href="https://github.com/massivemadness/Squircle-CE">Squircle CE</a> by Blacksquircle and is published under the Apache 2.0 license.</p>
 <ul><li>Requires Android 7.0 (API 24) or newer.</li><li>App id: <code>com.vcode.studio</code>, so it installs next to the original Squircle CE.</li><li>Source code and releases: <a href="https://github.com/Christianzz4603/Vcode">github.com/Christianzz4603/Vcode</a>.</li></ul>
@@ -23,6 +23,24 @@
 <p>Turn on <b>Auto save</b> in Settings &gt; Editor to save files automatically. <b>Auto save delay</b> chooses when: when you switch tabs or leave the app, or 1, 3 or 10 seconds after you stop typing.</p>
 <h3>Cursor and text</h3>
 <ul><li><b>Cursor style</b>: thin, normal or thick.</li><li><b>Smooth cursor animation</b>: animates the cursor when it moves (off by default).</li><li><b>Font ligatures</b>: joins characters like <code>=&gt;</code> and <code>!=</code> when the font supports it (on by default).</li></ul>
+<h2 id="intellisense">IntelliSense</h2>
+<p>As you type, Vcode suggests keywords, functions and classes for the language of the file, together with words that already appear in the file. Type <code>imp</code> and tap <code>import</code>.</p>
+<ul><li>Built-in sets: JavaScript, TypeScript, Kotlin, Java, Python, HTML, XML (including Android) and shell.</li><li>The suggestion data lives in <code>assets/intellisense/*.json</code> in the source code, so you can add your own language.</li><li>Plugins can add keyword lists for more languages, see <a href="#plugins">Plugins</a>.</li></ul>
+<h2 id="panel">Bottom panel</h2>
+<p>The bottom panel has four tabs: <b>Problems</b>, <b>Output</b>, <b>Preview</b> and <b>Run</b>. Drag its edge to resize it, or open it full screen when you need room.</p>
+<ul><li><b>Run</b> can run JavaScript and shell scripts inside the app. For other languages, use <a href="#run">Run in Termux</a>.</li><li><b>Output</b> shows what your script prints.</li><li><b>Preview</b> shows web content in a built-in view.</li><li><b>Problems</b> lists the problems found in the open file.</li></ul>
+<h2 id="tools">Tools bar</h2>
+<p>The tools bar sits above the row of symbol keys (<code>{ } ( ) &lt; &gt;</code>) and holds quick actions such as Run and the panel tabs.</p>
+<ul><li>Drag a tool to change its position.</li><li>Hide the tools you do not use.</li></ul>
+<h2 id="run">Run in Termux</h2>
+<p>Vcode does not bundle a terminal. To compile or run other languages, it hands the command to the real <a href="https://termux.dev">Termux</a> app, so you can use any package you install there (for example <code>python</code>, <code>clang</code> or <code>nodejs</code>).</p>
+<ol class="steps"><li>Install Termux (the F-Droid or GitHub build) and open it once.</li><li>In Termux, allow other apps to run commands, then restart Termux:<pre><code>mkdir -p ~/.termux
+echo "allow-external-apps = true" &gt;&gt; ~/.termux/termux.properties</code></pre></li><li>In Vcode, use <b>Run in Termux</b>. If Android asks for the Termux run-commands permission, allow it.</li></ol>
+<div class="note">Android 10 and newer do not let apps run downloaded programs from their own storage, which is why Vcode uses the Termux app instead of shipping its own copy.</div>
+<h2 id="ai">AI assistant</h2>
+<p>The AI tab lets you ask questions about your code. Answers stream in as they are written.</p>
+<ol class="steps"><li>Create an API key at <a href="https://openrouter.ai">OpenRouter</a>.</li><li>In Vcode, open <b>Settings</b>, then <b>AI assistant</b>, and add the key.</li><li>Open the <b>AI</b> tab and ask your question.</li></ol>
+<div class="note">You pay your own OpenRouter usage. The key is stored in the app settings on your device without extra encryption, so use a key with a spending limit.</div>
 <h2 id="themes">Themes</h2>
 <p>Vcode ships 15 themes: Vcode Dark, Dark+, Light+, One Dark, GitHub Dark, Dracula, Darcula, Eclipse, Monokai, Obsidian, IntelliJ Light, Ladies Night, Tomorrow Night, Solarized Light, Visual Studio. Pick one in <b>Settings &gt; Application &gt; Color scheme</b>. A theme colors the whole app, not only the code. <b>Vcode Dark</b> is the default. Plugins can add more themes. See all of them on the <a href="/themes">themes page</a>.</p>
 <h2 id="settings">Settings reference</h2>
