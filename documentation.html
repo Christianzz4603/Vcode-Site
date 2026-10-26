@@ -57,7 +57,7 @@ echo "allow-external-apps = true" &gt;&gt; ~/.termux/termux.properties</code></p
 <tr><td>Plugins</td><td>Install, turn on or off, and remove plugins.</td></tr>
 <tr><td>About</td><td>Version, privacy policy, website and contribution links.</td></tr></table></div>
 <h2 id="plugins">Plugins</h2>
-<p>Plugins add themes, keyword suggestions and file types. A plugin is <b>data only</b>: it contains no code, so installing one cannot run anything on your phone. Browse the plugins published for Vcode on the <a href="/plugins">plugins page</a>.</p>
+<p>Plugins add themes, keyword suggestions and file types. A plugin is <b>data only</b> by default: one with only themes, keywords and file types contains no code, so installing it cannot run anything on your phone. A plugin can also contain Kotlin code. You have to turn on <b>Allow code plugins</b> first, Vcode shows the permissions and the SHA-256 of the file before it installs one, and the code runs inside Vcode with the same access as the app, so only install code plugins from authors you trust. See <a href="https://github.com/Christianzz4603/Vcode/blob/main/docs/PLUGINS.md">the plugin guide</a>. Browse the plugins published for Vcode on the <a href="/plugins">plugins page</a>.</p>
 <h3>Install a plugin</h3>
 <ol><li>Open <b>Settings &gt; Plugins</b>.</li><li>Tap <b>Install plugin</b> and pick a <code>.zip</code> or <code>.json</code> file.</li><li>Use the switch to turn it on or off, or <b>Remove</b> to delete it.</li></ol>
 <p>Themes show up in the color scheme list right away. Keyword suggestions and file types apply to files you open afterwards.</p>
